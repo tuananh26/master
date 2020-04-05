@@ -10,7 +10,7 @@ class Chess:
         self.type = type
         self.index_x = index_x
         self.index_y = index_y
-        if(type == True):
+        if(type == "x"):
             self.img = arcade.Sprite(path_img_x, IMAGE_SCALING)
         else:
             self.img = arcade.Sprite(path_img_o, IMAGE_SCALING)
