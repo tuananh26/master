@@ -2,7 +2,8 @@
 import arcade
 
 from chess import Chess
-from const import SCREEN_HEIGHT, SCREEN_TITLE, SCREEN_WIDTH, BACKGROUND_COLOR, PIXEL_WIDTH, LINE_COLOR
+from definiteClass import Index
+from const import SCREEN_HEIGHT, SCREEN_TITLE, SCREEN_WIDTH, BACKGROUND_COLOR, PIXEL_WIDTH, LINE_COLOR, NUMBER_COLUMN, NUMBER_ROW
 from calculate import caculate_index
 from function import is_chess_exists
 
@@ -10,25 +11,22 @@ from function import is_chess_exists
 class MyGame(arcade.Window):
 
     def __init__(self):
-
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
         arcade.set_background_color(BACKGROUND_COLOR)
 
     def setup(self):
-        self.chess_list = arcade.SpriteList()
-        self.is_chess_x = True
-        self.chess_index_list = [[]]
+        self.chess_img_list = arcade.SpriteList()
+        self.chess_type = True
+        self.chess_list = []
+        self.board = []
 
     def on_mouse_press(self, x, y, button, modifiers):
-        index_x = caculate_index(x)
-        index_y = caculate_index(y)
-
-        if(not(is_chess_exists(self.chess_index_list, index_x, index_y))):
-            chess = Chess(self.is_chess_x, index_x, index_y)
-
-            self.chess_index_list.append([index_x, index_y])
-            self.chess_list.append(chess.img)
-            self.is_chess_x = not(self.is_chess_x)
+        chess_temp = Chess(
+            self.chess_type, caculate_index(x), caculate_index(y))
+        if not(is_chess_exists(chess_temp, self.chess_list)):
+            self.chess_list.append(chess_temp)
+            self.chess_img_list.append(chess_temp.img)
+            self.chess_type = not(self.chess_type)
 
     def on_draw(self):
         arcade.start_render()
@@ -38,7 +36,7 @@ class MyGame(arcade.Window):
         for y in range(0, SCREEN_HEIGHT+1, PIXEL_WIDTH):
             arcade.draw_line(0, y, SCREEN_WIDTH, y, LINE_COLOR, 2)
 
-        self.chess_list.draw()
+        self.chess_img_list.draw()
 
 
 def main():
