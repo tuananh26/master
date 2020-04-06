@@ -77,7 +77,7 @@ def is_victory(index_x, index_y, type_chess, board):
         return True
 
     # check dianol
-    print("check dianol")
+    print("check dianol \\")
     count = 1
     x = index_x
     y = index_y
@@ -97,6 +97,12 @@ def is_victory(index_x, index_y, type_chess, board):
             break
         count += 1
 
+    print("count = ", count)
+    if(count == 5):
+        return True
+
+    print("check dianol //")
+    count = 1
     x = index_x
     y = index_y
     while(count < 5):
