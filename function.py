@@ -5,7 +5,7 @@ from const import NUMBER_COLUMN, NUMBER_ROW
 
 def is_chess_exists(chess, list_chess):
     for item in list_chess:
-        if(item.index_x == chess.index_x and item.index_y == chess.index_y):
+        if(item.x == chess.x and item.y == chess.y):
             return True
     return False
 
@@ -17,28 +17,50 @@ def switch_type(type):
         return "x"
 
 
-def is_victory(chess, board):
+def out_of_index(x, y):
+    if(x in range(0, NUMBER_COLUMN) and y in range(0, NUMBER_ROW)):
+        return False
+    return True
+
+
+def is_victory(index_x, index_y, type_chess, board):
     # detect nearly chess
-    count = 0
-    chess_current = chess
-    board[chess_current.index_x][chess_current.index_y] = "checked"
+    count = 1
+    # check horizontal
+    for row in board:
+        print(row)
 
+    print("right")
     while(True):
-        # check horizontal
-            # right
-        chess_current.index_x += 1
-        # out of index column
-        if(chess_current.index_x == NUMBER_COLUMN):
+        if(count >= 5):
             break
-        # checked chess
-        if(board[chess_current.index_x][chess_current.index_y] == "checked"):
+        index_x += 1
+        if(out_of_index(index_x, index_y)):
             break
-        # different type
-        if(board[chess_current.index_x][chess_current.index_y]):
+        if(board[index_x][index_y] != type_chess):
             break
+        # print("x=", index_x)
+        # print("y= ", index_y)
+        # print(board[index_x][index_y])
+        count += 1
 
-        chess_current.type = board[chess_current.index_x][chess_current.index_y]
-        if(count == 5):
+    print("left")
+    while(True):
+        if(count >= 5):
             break
+        index_x -= 1
+        if(out_of_index(index_x, index_y)):
+            break
+        if(board[index_x][index_y] != type_chess):
+            break
+        # print("x=", index_x)
+        # print("y= ", index_y)
+        # print(board[index_x][index_y])
+        count += 1
+
+    print(count)
+    if(count == 5):
+        print("win")
+        return True
 
     return False

@@ -15,3 +15,9 @@ def calculate_center_position(weight):
 
 def calculate_center_position_from_index(index):
     return index*PIXEL_WIDTH+PIXEL_WIDTH/2
+
+
+def abs(x):
+    if(x > 0):
+        return x
+    return x*(-1)
