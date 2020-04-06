@@ -30,8 +30,8 @@ class MyGame(arcade.Window):
             self.board[chess_temp.x][chess_temp.y] = self.chess_type
             self.chess_type = switch_type(self.chess_type)
 
-            for row in self.board:
-                print(row)
+            a = is_victory(chess_temp.x, chess_temp.y,
+                           chess_temp.type, self.board)
 
     def on_draw(self):
         arcade.start_render()

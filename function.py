@@ -18,49 +18,104 @@ def switch_type(type):
 
 
 def out_of_index(x, y):
-    if(x in range(0, NUMBER_COLUMN) and y in range(0, NUMBER_ROW)):
+    if(x in range(0, NUMBER_ROW) and y in range(0, NUMBER_COLUMN)):
         return False
+    print("out of index")
     return True
 
 
 def is_victory(index_x, index_y, type_chess, board):
     # detect nearly chess
-    count = 1
+
     # check horizontal
+
     for row in board:
         print(row)
-
-    print("right")
-    while(True):
-        if(count >= 5):
+    print("check horizontal")
+    count = 1
+    x = index_x
+    y = index_y
+    while(count < 5):
+        y += 1
+        if(out_of_index(x, y)or board[x][y] != type_chess):
             break
-        index_x += 1
-        if(out_of_index(index_x, index_y)):
-            break
-        if(board[index_x][index_y] != type_chess):
-            break
-        # print("x=", index_x)
-        # print("y= ", index_y)
-        # print(board[index_x][index_y])
         count += 1
 
-    print("left")
-    while(True):
-        if(count >= 5):
+    x = index_x
+    y = index_y
+    while(count < 5):
+        y -= 1
+        if(out_of_index(x, y)or board[x][y] != type_chess):
             break
-        index_x -= 1
-        if(out_of_index(index_x, index_y)):
-            break
-        if(board[index_x][index_y] != type_chess):
-            break
-        # print("x=", index_x)
-        # print("y= ", index_y)
-        # print(board[index_x][index_y])
         count += 1
 
-    print(count)
+    print("count = ", count)
     if(count == 5):
-        print("win")
         return True
 
+    # check vertical
+    print("check vertical")
+    count = 1
+    x = index_x
+    y = index_y
+    while(count < 5):
+        x += 1
+        if(out_of_index(x, y)or board[x][y] != type_chess):
+            break
+        count += 1
+
+    x = index_x
+    y = index_y
+    while(count < 5):
+        x -= 1
+        if(out_of_index(x, y)or board[x][y] != type_chess):
+            break
+        count += 1
+
+    print("count = ", count)
+    if(count == 5):
+        return True
+
+    # check dianol
+    print("check dianol")
+    count = 1
+    x = index_x
+    y = index_y
+    while(count < 5):
+        x += 1
+        y += 1
+        if(out_of_index(x, y)or board[x][y] != type_chess):
+            break
+        count += 1
+
+    x = index_x
+    y = index_y
+    while(count < 5):
+        x -= 1
+        y -= 1
+        if(out_of_index(x, y)or board[x][y] != type_chess):
+            break
+        count += 1
+
+    x = index_x
+    y = index_y
+    while(count < 5):
+        x -= 1
+        y += 1
+        if(out_of_index(x, y)or board[x][y] != type_chess):
+            break
+        count += 1
+
+    x = index_x
+    y = index_y
+    while(count < 5):
+        x += 1
+        y -= 1
+        if(out_of_index(x, y)or board[x][y] != type_chess):
+            break
+        count += 1
+
+    print("count = ", count)
+    if(count == 5):
+        return True
     return False
